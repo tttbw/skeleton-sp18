@@ -1,86 +1,88 @@
-public class LinkedListDeque {
-    public static class Node {
-        int value;
-        Node prev;
-        Node rest;
-        public Node(int x,Node m,Node n){
+import javax.swing.*;
+
+public class LinkedListDeque<T> {
+    public  class Node {
+        private T value;
+        private Node prev;
+        private  Node next;
+        public Node(T x,Node pre,Node nex){
             value = x;
-            rest = n;
-            prev = m;
-        }
-    public void leftlink(Node l) {
-            this.prev = l;
-        }
-    public void rightlink(Node r) {
-            this.rest = r;
+            next = nex;
+            prev = pre;
         }
     }
     public Node sentinel;
-    public Node first;
-    public Node last;
     public int size;
     public LinkedListDeque() {
-        first = null;
+        T meaningless = null;
+        sentinel = new Node(meaningless,null,null);
+        sentinel.prev = sentinel;
+        sentinel.next = sentinel;
         size = 0;
     }
 
-    public LinkedListDeque(int x) {
-        sentinel = new Node( 233,null,null);
-        first = new Node(x,sentinel,null);
-
-        /** find last node **/
-        Node p = sentinel;
-        while(p.rest != null) {
-            p = p.rest;
-        }
-        last = p;
-        sentinel = new Node( 233,last,first);
-        size += 1;
-
-    }
     public void getFirst() {
-        System.out.println(first.value);
+        System.out.println(sentinel.next.value);
     }
     public void getLast() {
-        System.out.println(last.value);
+        System.out.println(sentinel.prev.value);
     }
-    public void addFirst(int x) {
+    public void addFirst(T x) {
         size += 1;
-        first = new Node(x,sentinel,first);
-        /**sentinel.rest = first;**/
+        Node Newnode = new Node(x,null,null);
+        Newnode.prev = sentinel;
+        Newnode.next = sentinel.next;
+        sentinel.next.prev = Newnode;
+        sentinel.next = Newnode;
     }
-    public void addLast(int x){
+    public void addLast(T x){
         size += 1;
-        last = new Node(x,last,sentinel);
-        /**sentinel.prev = last;**/
-
+        Node Newnode = new Node(x,null,null);
+        Newnode.prev = sentinel.prev;
+        Newnode.next = sentinel;
+        sentinel.prev.next = Newnode;
+        sentinel.prev = Newnode;
     }
     public boolean isEmpty() {
-        return first == null;
+        return sentinel.next == sentinel;
     }
     public int size() {
         return this.size;
     }
     public void printDeque() {
-            Node p = first;
+            Node p = sentinel.next;
             while(p != sentinel){
-                System.out.println(p.value);
-                p = p.rest;
+                System.out.print(p.value + " ");
+                p = p.next;
         }
     }
-
-
-    public  static  void  main(String[] args) {
-        LinkedListDeque ld = new LinkedListDeque();
-        ld.addFirst(123);
-        ld.addLast(456);
-        ld.addLast(789);
-        ld.getFirst();
-        ld.getLast();
-        ld.printDeque();
-        LinkedListDeque emld = new LinkedListDeque();
-        System.out.println(emld.isEmpty());
-        System.out.println(ld.size());
-
+    public T removeFirst() {
+        if(sentinel.next == null){return null;}
+        Node dropOne;
+        dropOne = sentinel.next;
+        sentinel.next.next.prev = sentinel;
+        sentinel.next = sentinel.next.next;
+        return dropOne.value;
     }
+    public T removeLast() {
+        if(sentinel.prev == null){return null;}
+        Node dropOne;
+        dropOne = sentinel.prev;
+        sentinel.prev.prev.next = sentinel;
+        sentinel.prev = sentinel.prev.prev;
+        return dropOne.value;
+    }
+
+    public T get(int index) {
+        if(index > this.size() - 1){return null;}
+        if(index < 0){return null;}
+        int i = 0;
+        Node p = sentinel;
+        while(i < index + 1) {
+           p = p.next;
+           i ++;
+        }
+        return p.value;
+    }
+
 }
