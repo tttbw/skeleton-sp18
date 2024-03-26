@@ -12,7 +12,8 @@ public class ArrayDeque<item> {
 
     /** nextLast is the index addFirst will takeand default is 4 */
     public int nextFirst;
-
+    /** record the first point everytime resize() called */
+    private int hajime = 1;
 
 
     public ArrayDeque() {
@@ -24,7 +25,7 @@ public class ArrayDeque<item> {
     }
 
     public int IndexLoopAdd(int x) {
-        if(x >= length){x = 1;}
+        if(x >= length){x = hajime;}
         else {x += 1;}
         return x;
     }
@@ -52,12 +53,14 @@ public class ArrayDeque<item> {
         System.arraycopy(items,0,a,0,size);
         items = a;
         length += cap;
+        hajime += cap;
 
     }
     public void addLast(item x) {
         if(size == length) {
             this.resize(8);
             nextLast += 8;
+            nextFirst += 8;
         }
         nextLast = IndexLoopAdd(nextLast);
         if(nextLast == length){items[length - 1] = x;}
@@ -82,7 +85,7 @@ public class ArrayDeque<item> {
         return items[x];
     }
 
-    /** test */
+    /** test(before I learn how to test */
     public static void main(String[] args) {
         ArrayDeque<Integer> testArray = new ArrayDeque<>();
         testArray.addFirst(4);
@@ -103,6 +106,8 @@ public class ArrayDeque<item> {
         testArray.addFirst(17);
         testArray.addLast(11);
         testArray.addLast(12);
+        testArray.addLast(14);
+        testArray.addFirst(111);
 
 
 
