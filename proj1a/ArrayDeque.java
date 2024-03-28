@@ -12,6 +12,7 @@ public class ArrayDeque<item> {
 
     /** nextLast is the index addFirst will takeand default is 4 */
     public int nextFirst;
+
     /** record the first point everytime resize() called */
     private int hajime = 1;
 
@@ -82,37 +83,21 @@ public class ArrayDeque<item> {
     }
 
     public item get(int x) {
-        return items[x];
+        if(x > length -1){return null;}
+        return null;
     }
 
     /** test(before I learn how to test */
     public static void main(String[] args) {
         ArrayDeque<Integer> testArray = new ArrayDeque<>();
-        testArray.addFirst(4);
-        testArray.addLast(8);
-        testArray.addLast(6);
-        testArray.addFirst(5);
-        testArray.addLast(9);
-        testArray.addLast(10);
-        testArray.addLast(11);
-        testArray.addLast(13);
-        testArray.addFirst(15);
-        testArray.addFirst(20);
-        testArray.addLast(21);
-        testArray.addLast(21);
-        testArray.addLast(21);
-        testArray.addLast(23);
-        testArray.addFirst(22);
-        testArray.addFirst(17);
-        testArray.addLast(11);
-        testArray.addLast(12);
-        testArray.addLast(14);
-        testArray.addFirst(111);
+        testArray.addFirst(1);
+        testArray.addFirst(2);
+        testArray.addLast(3);
+        testArray.addLast(4);
 
 
 
-
-
+        // System.out.println("get 1th:" + " " + testArray.get(1));
         System.out.println("nextFirst:" + " " + testArray.nextFirst);
         System.out.println("nextLast:" + " " + testArray.nextLast);
         System.out.println("size:" + " " + testArray.size);
