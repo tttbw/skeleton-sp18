@@ -29,5 +29,17 @@ public class Palindrome {
         }
         return true;
     }
+public boolean isPalindrome(String word, CharacterComparator cc) {
+    Deque<Character> wordDq = wordToDeque(word);
+    if(wordDq.isEmpty() || wordDq.size() == 1){
+        return true;
+    }
+    while(wordDq.size() > 1) {
+        if(!cc.equalChars(wordDq.removeFirst(),wordDq.removeLast())) {
+            return false;
+        }
+    }
+    return true;
 
+    }
 }

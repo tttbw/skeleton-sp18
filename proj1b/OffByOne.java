@@ -6,13 +6,4 @@ public  class OffByOne implements CharacterComparator {
     public boolean equalChars(char x, char y) {
         return x - y == 1 || y - x == 1;
     }
-    @Test
-    public void testOffByOne() {
-        assertTrue(equalChars('a','b'));
-        assertTrue(equalChars('c','b'));
-        assertTrue(equalChars('&','%'));
-        assertFalse(equalChars('a','c'));
-
-    }
-
 }

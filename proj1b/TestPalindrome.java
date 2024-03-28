@@ -6,6 +6,7 @@ public class TestPalindrome {
     // new Palindromes, or the autograder might be upset.
     static Palindrome palindrome = new Palindrome();
 
+
     @Test
     public void testWordToDeque() {
         Deque d = palindrome.wordToDeque("persiflage");
@@ -32,4 +33,12 @@ public class TestPalindrome {
     }
 
 
+    @Test
+    public void testIsPalindromeObO() {
+        CharacterComparator cc = new OffByOne();
+        assertTrue(palindrome.isPalindrome("flake",cc));
+        assertFalse(palindrome.isPalindrome("cdc",cc));
+        assertTrue(palindrome.isPalindrome("a"));
+
+    }
 }
