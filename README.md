@@ -1,2 +1,2 @@
-## My learning in UCB CS61B 21fall
-proj1b cleared 2024 3.28
+## My learning in UCB CS61B 18fall
+proj1 golden cleared 2024 3.29
