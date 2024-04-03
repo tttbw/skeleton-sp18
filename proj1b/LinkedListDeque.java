@@ -11,10 +11,8 @@ public class LinkedListDeque<T> implements Deque<T> {
             prev = pre;
         }
     }
-
     public Node sentinel;
     public int size;
-
     public LinkedListDeque() {
         T meaningless = null;
         sentinel = new Node(meaningless, null, null);
@@ -22,7 +20,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         sentinel.next = sentinel;
         size = 0;
     }
-
     public void getFirst() {
         System.out.println(sentinel.next.value);
     }
